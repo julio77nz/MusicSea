@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
 
 class Group(models.Model):
@@ -7,10 +8,14 @@ class Group(models.Model):
     birthdate = models.DateField()
     bibliography = models.TextField()
     image = models.TextField()
+    url = models.URLField(blank=True, null=True)
     user = models.ForeignKey(User, default=1)
 
     def __unicode__(self):
         return u"%s" % self.name
+
+    def get_absolute_url(self):
+        return reverse('musicseaapp:group_detail', kwargs={'pk': self.pk})
 
 class Artist(models.Model):
     name = models.TextField()
@@ -23,6 +28,9 @@ class Artist(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.name
+
+    def get_absolute_url(self):
+        return reverse('musicseaapp:artist_detail', kwargs={'pkr': self.group.pk, 'pk': self.pk})
 
 class Album(models.Model):
     name = models.TextField()
