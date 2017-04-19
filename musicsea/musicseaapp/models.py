@@ -5,7 +5,7 @@ class Group(models.Model):
     name = models.TextField()
     genre = models.TextField()
     birthdate = models.DateField()
-    bibliography = models.DateField()
+    bibliography = models.TextField()
     image = models.TextField()
     user = models.ForeignKey(User, default=1)
 
@@ -14,10 +14,9 @@ class Group(models.Model):
 
 class Artist(models.Model):
     name = models.TextField()
-    group = models.TextField()
     gender = models.TextField()
     birthdate = models.DateField()
-    bibliography = models.DateField()
+    bibliography = models.TextField()
     image = models.TextField()
     user = models.ForeignKey(User, default=1)
     group = models.ForeignKey(Group, null=True, related_name='artists')
@@ -27,9 +26,8 @@ class Artist(models.Model):
 
 class Album(models.Model):
     name = models.TextField()
-    group = models.TextField()
     release = models.DateField()
-    bibliography = models.DateField()
+    bibliography = models.TextField()
     image = models.TextField()
     user = models.ForeignKey(User, default=1)
     group = models.ForeignKey(Group, null=True, related_name='albums')
@@ -39,13 +37,12 @@ class Album(models.Model):
 
 class Song(models.Model):
     name = models.TextField()
-    group = models.TextField()
-    album = models.TextField()
     lyrics = models.TextField()
-    bibliography = models.DateField()
+    about = models.TextField()
     image = models.TextField()
     user = models.ForeignKey(User, default=1)
     album = models.ForeignKey(Album, null=True, related_name='songs')
+    group = models.ForeignKey(Group, null=True, related_name='groupsongs')
 
     def __unicode__(self):
         return u"%s" % self.name
