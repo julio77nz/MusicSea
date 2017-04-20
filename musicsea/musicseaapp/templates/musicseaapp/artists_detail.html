@@ -7,7 +7,9 @@
     (<a href="{% url 'musicseaapp:artists_edit' object.name %}">edit</a>)
     </h1>
     <h2> {{ object.name }} </h2>
-
+    {%	if	object.image	%}
+        <p><img	src="{{object.image.url}}" width="300px"/></p>
+    {%	endif	%}
     <ul>
       <li>
           <b>Name:</b> {{object.name}}
