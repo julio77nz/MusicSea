@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Group</title>
+  </head>
+  <body>
+    <h1>Group
+    (<a href="{% url 'musicseaapp:groups_edit' object.name %}">edit</a>)
+    </h1>
+    <h2> {{ object.name }} </h2>
+    <ul>
+      <li>
+              <b>Name:</b> {{object.name}}
+      </li>
+      <li>
+              <b>Genre:</b> {{object.genre}}
+      </li>
+      <li>
+              <b>Birthdate:</b> {{object.birthdate}}
+      </li>
+      <li>
+              <b>Bibliography:</b> {{object.bibliography}}
+      </li>
+      <li>
+              <b>Image:</b> {{object.image}}
+      </li>
+
+      <br>
+      <a href='/musicseaapp/groups'> More groups </a>
+      <br>
+      <a href='/'> Home </a>
+    </ul>
+  </body>
+</html>

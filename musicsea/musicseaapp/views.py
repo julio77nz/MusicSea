@@ -1,21 +1,35 @@
 from django.shortcuts import render
+from django.views.generic import DetailView, ListView
+from django.http import HttpResponse
+from django.views.generic.base import TemplateResponseMixin
+from django.core import serializers
+from django.views.generic.edit import CreateView
+from models import *
+from forms import *
 
-from  django.core.urlresolvers import reverse
-from  django.http import HttpResponseRedirect
-from  django.shortcuts import get_object_or_404
-from  django.views.generic import DetailView
-from  django.views.generic.edit import CreateView
-from  models import Group, Artist
-from  forms import GroupForm, ArtistForm
 
+def mainpage(request):
+    return render(request, 'musicseaapp/mainpage.html')
 
-class GroupDetail(DetailView):
+class GroupsList(ListView):
     model = Group
-    template_name = 'musicseaapp/group_detail.html'
+    queryset = Group.objects.all()
+    context_object_name = 'groups'
+    template_name = 'musicseaapp/groups_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(GroupDetail, self).get_context_data(**kwargs)
-        return context
+class ArtistsList(ListView):
+    model = Artist
+    queryset = Artist.objects.all()
+    context_object_name = 'artists'
+    template_name = 'musicseaapp/artists_list.html'
+
+class GroupsDetail(DetailView):
+    model = Group
+    template_name = 'musicseaapp/groups_detail.html'
+
+class ArtistsDetail(DetailView):
+    model = Artist
+    template_name = 'musicseaapp/artists_detail.html'
 
 class GroupCreate(CreateView):
     model = Group
@@ -33,6 +47,4 @@ class ArtistCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.group = Group.objects.get(id=self.kwargs['pk'])
         return super(ArtistCreate, self).form_valid(form)
-

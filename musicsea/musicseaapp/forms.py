@@ -1,14 +1,23 @@
 from  django.forms import ModelForm
-from  models import Group, Artist
+from  models import *
 
 
 class GroupForm(ModelForm):
     class Meta:
         model = Group
-        exclude = ('user', 'date',)
-
+        exclude = ()
 
 class ArtistForm(ModelForm):
     class Meta:
         model = Artist
-        exclude = ('user', 'date', 'group',)
+        exclude = ()
+
+class AlbumForm(ModelForm):
+    class Meta:
+        model = Album
+        exclude = ()
+
+class SongForm(ModelForm):
+    class Meta:
+        model = Song
+        exclude = ()

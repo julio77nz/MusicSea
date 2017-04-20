@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title> Groups </title>
+      <h1> Groups
+      {% if user %}(<a href="{% url 'musicseaapp:groups_create' %}">add</a>){% endif %}
+      </h1>
+  </head>
+  <body background="http://aronfilms.com/wp-content/uploads/2011/11/film_roll.jpg">
+    {% if groups %}
+    <ul>
+    {% for group in groups %}
+    <li>
+    <a href="{% url "musicseaapp:groups_detail" group.name%}"> {{group.name}} </a>
+    </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p style="text-indent: 2em">No hi ha cap grup</p>
+    {% endif %}
+
+    <br>
+      <a href='/'> Home </a>
+  </body>
+</html>

@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -15,7 +16,7 @@ class Group(models.Model):
         return u"%s" % self.name
 
     def get_absolute_url(self):
-        return reverse('musicseaapp:group_detail', kwargs={'pk': self.pk})
+        return reverse('musicseaapp:groups_detail', kwargs={'pk': self.pk})
 
 class Artist(models.Model):
     name = models.TextField()
@@ -30,7 +31,7 @@ class Artist(models.Model):
         return u"%s" % self.name
 
     def get_absolute_url(self):
-        return reverse('musicseaapp:artist_detail', kwargs={'pkr': self.group.pk, 'pk': self.pk})
+        return reverse('musicseaapp:artists_detail', kwargs={'pk': self.pk})
 
 class Album(models.Model):
     name = models.TextField()
@@ -43,6 +44,9 @@ class Album(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
 
+    def get_absolute_url(self):
+        return reverse('musicseaapp:albums_detail', kwargs={'pk': self.pk})
+
 class Song(models.Model):
     name = models.TextField()
     lyrics = models.TextField()
@@ -54,3 +58,6 @@ class Song(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.name
+
+    def get_absolute_url(self):
+        return reverse('musicseaapp:songs_detail', kwargs={'pk': self.pk})

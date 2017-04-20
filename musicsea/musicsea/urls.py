@@ -19,6 +19,7 @@ from musicseaapp.views import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', mainpage),
     url(r'^musicseaapp/',  include('musicseaapp.urls',  namespace='musicseaapp')),
     url(r'^accounts/login/$',  login,  name='login'),
     url(r'^accounts/logout/$',  logout,  name='logout'),
