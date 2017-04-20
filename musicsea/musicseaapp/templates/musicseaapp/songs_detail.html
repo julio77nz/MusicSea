@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Song</title>
+  </head>
+  <body>
+    <h1>Song
+    (<a href="{% url 'musicseaapp:songs_edit' object.name %}">edit</a>)
+    </h1>
+    <h2> {{ object.name }} </h2>
+
+    <ul>
+      <li>
+          <b>Name:</b> {{object.name}}
+      </li>
+
+      <li>
+          <b>Lyrics:</b> {{object.lyrics}}
+      </li>
+
+      <li>
+          <b>About:</b> {{object.about}}
+      </li>
+
+      <li>
+          <b>Image:</b> {{object.image}}
+      </li>
+
+      <li>
+          <b>Group:</b> {{object.group}}
+      </li>
+
+      <li>
+          <b>Album:</b> {{object.album}}
+      </li>
+
+      <br>
+      <a href='/musicseaapp/songs'> More Songs </a>
+      <br>
+      <a href='/'> Home </a>
+    </ul>
+  </body>
+</html>

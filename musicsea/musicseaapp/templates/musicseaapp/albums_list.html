@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title> Albums </title>
+      <h1> Albums
+      {% if user %}(<a href="{% url 'musicseaapp:albums_create' %}">add</a>){% endif %}
+      </h1>
+  </head>
+  <body background="http://aronfilms.com/wp-content/uploads/2011/11/film_roll.jpg">
+    {% if albums %}
+    <ul>
+    {% for album in albums %}
+    <li>
+    <a href="{% url "musicseaapp:albums_detail" album.name%}"> {{album.name}} </a>
+    </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p style="text-indent: 2em">No hi ha cap albums</p>
+    {% endif %}
+
+    <br>
+      <a href='/'> Home </a>
+  </body>
+</html>
