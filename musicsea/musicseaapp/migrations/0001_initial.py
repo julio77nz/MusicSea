@@ -15,30 +15,33 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Album',
             fields=[
-                ('name', models.TextField(unique=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.TextField()),
                 ('release', models.DateField()),
                 ('bibliography', models.TextField()),
-                ('image', models.TextField()),
+                ('image', models.ImageField(null=True, upload_to='media', blank=True)),
             ],
         ),
         migrations.CreateModel(
             name='Artist',
             fields=[
-                ('name', models.TextField(unique=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.TextField()),
                 ('gender', models.TextField()),
                 ('birthdate', models.DateField()),
                 ('bibliography', models.TextField()),
-                ('image', models.TextField()),
+                ('image', models.ImageField(null=True, upload_to='media', blank=True)),
             ],
         ),
         migrations.CreateModel(
             name='Group',
             fields=[
-                ('name', models.TextField(unique=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.TextField()),
                 ('genre', models.TextField()),
                 ('birthdate', models.DateField()),
                 ('bibliography', models.TextField()),
-                ('image', models.TextField()),
+                ('image', models.ImageField(null=True, upload_to='media', blank=True)),
                 ('url', models.URLField(null=True, blank=True)),
                 ('user', models.ForeignKey(default=1, to=settings.AUTH_USER_MODEL)),
             ],
@@ -46,10 +49,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Song',
             fields=[
-                ('name', models.TextField(unique=True, serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.TextField()),
                 ('lyrics', models.TextField()),
                 ('about', models.TextField()),
-                ('image', models.TextField()),
+                ('image', models.ImageField(null=True, upload_to='media', blank=True)),
                 ('album', models.ForeignKey(related_name='songs', to='musicseaapp.Album', null=True)),
                 ('group', models.ForeignKey(related_name='groupsongs', to='musicseaapp.Group', null=True)),
                 ('user', models.ForeignKey(default=1, to=settings.AUTH_USER_MODEL)),

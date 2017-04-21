@@ -10,7 +10,7 @@
     <ul>
     {% for group in groups %}
     <li>
-    <a href="{% url "musicseaapp:groups_detail" group.name%}"> {{group.name}} </a>
+    <a href="{% url "musicseaapp:groups_detail" group.id%}"> {{group.name}} </a>
     </li>
     {% endfor %}
     </ul>

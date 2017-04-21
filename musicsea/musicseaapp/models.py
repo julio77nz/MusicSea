@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 class Group(models.Model):
-    name = models.TextField(unique=True, primary_key=True)
+    name = models.TextField()
     genre = models.TextField()
     birthdate = models.DateField()
     bibliography = models.TextField()
@@ -19,7 +19,7 @@ class Group(models.Model):
         return reverse('musicseaapp:groups_detail', kwargs={'pk': self.pk})
 
 class Artist(models.Model):
-    name = models.TextField(unique=True, primary_key=True)
+    name = models.TextField()
     gender = models.TextField()
     birthdate = models.DateField()
     bibliography = models.TextField()
@@ -34,7 +34,7 @@ class Artist(models.Model):
         return reverse('musicseaapp:artists_detail', kwargs={'pk': self.pk})
 
 class Album(models.Model):
-    name = models.TextField(unique=True, primary_key=True)
+    name = models.TextField()
     release = models.DateField()
     bibliography = models.TextField()
     image = models.ImageField(upload_to="media", blank=True, null=True)
@@ -48,7 +48,7 @@ class Album(models.Model):
         return reverse('musicseaapp:albums_detail', kwargs={'pk': self.pk})
 
 class Song(models.Model):
-    name = models.TextField(unique=True, primary_key=True)
+    name = models.TextField()
     lyrics = models.TextField()
     about = models.TextField()
     image = models.ImageField(upload_to="media", blank=True, null=True)

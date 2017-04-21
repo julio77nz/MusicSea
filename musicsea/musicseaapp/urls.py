@@ -25,47 +25,47 @@ urlpatterns = [
 
 
 
-    url(r'^group/(?P<pk>[a-zA-Z0-9 ]+)/$',
+    url(r'^group/(?P<pk>\d+)/$',
         GroupsDetail.as_view(),
         name='groups_detail'),
 
-    url(r'^artist/(?P<pk>[a-zA-Z0-9 ]+)/$',
+    url(r'^artist/(?P<pk>\d+)/$',
         ArtistsDetail.as_view(),
         name='artists_detail'),
 
-    url(r'^album/(?P<pk>[a-zA-Z0-9 ]+)/$',
+    url(r'^album/(?P<pk>\d+)/$',
         AlbumsDetail.as_view(),
         name='albums_detail'),
 
-    url(r'^song/(?P<pk>[a-zA-Z0-9 ]+)/$',
+    url(r'^song/(?P<pk>\d+)/$',
         SongsDetail.as_view(),
         name='songs_detail'),
 
 
 
 
-    url(r'^groups/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
+    url(r'^groups/(?P<pk>\d+)/edit/$',
         UpdateView.as_view(
             model=Group,
             template_name='musicseaapp/form.html',
             form_class=GroupForm),
         name='groups_edit'),
 
-    url(r'^artists/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
+    url(r'^artists/(?P<pk>\d+)/edit/$',
         UpdateView.as_view(
             model=Artist,
             template_name='musicseaapp/form.html',
             form_class=ArtistForm),
         name='artists_edit'),
 
-    url(r'^albums/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
+    url(r'^albums/(?P<pk>\d+)/edit/$',
         UpdateView.as_view(
             model=Album,
             template_name='musicseaapp/form.html',
             form_class=AlbumForm),
         name='albums_edit'),
 
-    url(r'^songs/(?P<pk>[a-zA-Z0-9 ]+)/edit/$',
+    url(r'^songs/(?P<pk>\d+)/edit/$',
         UpdateView.as_view(
             model=Song,
             template_name='musicseaapp/form.html',

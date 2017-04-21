@@ -4,7 +4,7 @@
   </head>
   <body>
     <h1>Album
-    (<a href="{% url 'musicseaapp:albums_edit' object.name %}">edit</a>)
+    (<a href="{% url 'musicseaapp:albums_edit' object.id %}">edit</a>)
     </h1>
     <h2> {{ object.name }} </h2>
     {%	if	object.image	%}

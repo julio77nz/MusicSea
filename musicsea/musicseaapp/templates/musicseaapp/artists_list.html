@@ -10,7 +10,7 @@
     <ul>
     {% for artist in artists %}
     <li>
-    <a href="{% url "musicseaapp:artists_detail" artist.name%}"> {{artist.name}} </a>
+    <a href="{% url "musicseaapp:artists_detail" artist.id%}"> {{artist.name}} </a>
     </li>
     {% endfor %}
     </ul>

@@ -10,7 +10,7 @@
     <ul>
     {% for song in songs %}
     <li>
-    <a href="{% url "musicseaapp:songs_detail" song.name%}"> {{song.name}} </a>
+    <a href="{% url "musicseaapp:songs_detail" song.id%}"> {{song.name}} </a>
     </li>
     {% endfor %}
     </ul>
