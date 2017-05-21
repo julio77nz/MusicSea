@@ -5,6 +5,8 @@ from django.views.generic.base import TemplateResponseMixin
 from django.core import serializers
 from django.views.generic.edit import CreateView
 from models import *
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse, reverse_lazy
 from forms import *
 
 
@@ -95,3 +97,9 @@ class SongCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(SongCreate, self).form_valid(form)
+
+
+def delete_group():
+    #delg = Group.objects.get(pk=rest_pk)
+    #delg.delete()
+    return redirect('http://127.0.0.1:8000/musicseaapp/groups/')

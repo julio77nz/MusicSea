@@ -5,19 +5,19 @@ from  models import *
 class GroupForm(ModelForm):
     class Meta:
         model = Group
-        exclude = ()
+        exclude = ('user',)
 
 class ArtistForm(ModelForm):
     class Meta:
         model = Artist
-        exclude = ()
+        exclude = ('user',)
 
 class AlbumForm(ModelForm):
     class Meta:
         model = Album
-        exclude = ()
+        exclude = ('user',)
 
 class SongForm(ModelForm):
     class Meta:
         model = Song
-        exclude = ()
+        exclude = ('user',)
