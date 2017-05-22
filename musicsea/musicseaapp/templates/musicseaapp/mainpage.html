@@ -9,8 +9,10 @@
     {% if user.username %}
         <p>You are logged as: <b>{{ user.username }} </b>| <a href="{% url 'logout' %}?next={{request.path}}">logout</a></p>
     {% else %}
-        <p><a href="{% url 'login' %}?next={{request.path}}">login</a></p>{% endif %}
-    {% endblock %}
+        <p><a href="{% url 'login' %}?next={{request.path}}">login</a></p>
+        <p><a href="{% url 'register' %}"  class="top-menu">Sign up<span class="glyphicon glyphicon-plus"></span></a></p>
+    {% endif %}
+            {% endblock %}
 <body background="http://www.cqsisu.com/data/wallpapers/163/1273987.jpg">
     <a href="/admin">Admin</a>
     <br>
