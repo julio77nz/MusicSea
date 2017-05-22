@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.contrib.auth.views  import  login,  logout
 from musicseaapp.views import *
 from django.contrib.auth.forms import UserCreationForm
+from django.conf import settings
+from django.views.static import serve
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -29,3 +31,8 @@ urlpatterns = [
         form_class=UserCreationForm,
         success_url='/musicseaapp/groups/'),name='register'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT, })
+    ]

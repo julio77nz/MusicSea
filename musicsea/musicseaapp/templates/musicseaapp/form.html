@@ -1,4 +1,53 @@
+<head>
+    <link rel="stylesheet"
+        href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"	/>
+    <script	src="http://code.jquery.com/jquery-2.2.3.js"></script>
+    <script	src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 {% block content %}
+
+    <script>
+        $(function(){
+           var	genres = ["pop", "rock and roll", "country", "opera", "orchestra", "dubstep", "electro", "house"];
+              $("#id_genre").autocomplete({
+                source:	genres
+           });
+
+
+            $("#id_city").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "http://ws.geonames.org/searchJSON",
+                        dataType: "jsonp",
+                        data: {
+                            featureClass: "P",
+                            maxRows: 10,
+                            name_startsWith: request.term,
+                            username: "demo"
+                        },
+                        success: function( data ) {
+                            response( $.map( data.geonames, function( item ) {
+                                return {
+                                    label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                                    value: item.name,
+                                    provinceName: item.adminName1,
+                                    countryName: item.countryName
+                                }
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function( event, ui) {
+                    if (ui.item) {
+                        $("#id_province_or_state").val(ui.item.provinceName);
+                        $("#id_country").val(ui.item.countryName);
+                    }
+                }
+            });
+        });
+    </script>
+
     <form method="post" enctype="multipart/form-data" action="">
         {% csrf_token %}
         <table>

@@ -6,9 +6,12 @@ from django.db import models
 class Group(models.Model):
     name = models.TextField()
     genre = models.TextField()
+    city = models.TextField(blank=True, null=True)
+    province_or_state = models.TextField(blank=True, null=True)
+    country = models.TextField(blank=True, null=True)
     birthdate = models.DateField()
     bibliography = models.TextField()
-    image = models.ImageField(upload_to="media", blank=True, null=True)
+    image = models.ImageField(upload_to="musicsea", blank=True, null=True)
     url = models.URLField(blank=True, null=True)
     user = models.ForeignKey(User, default=1)
 
@@ -21,9 +24,12 @@ class Group(models.Model):
 class Artist(models.Model):
     name = models.TextField()
     gender = models.TextField()
+    city = models.TextField(blank=True, null=True)
+    province_or_state = models.TextField(blank=True, null=True)
+    country = models.TextField(blank=True, null=True)
     birthdate = models.DateField()
     bibliography = models.TextField()
-    image = models.ImageField(upload_to="media", blank=True, null=True)
+    image = models.ImageField(upload_to="musicsea", blank=True, null=True)
     user = models.ForeignKey(User, default=1)
     group = models.ForeignKey(Group, null=True, related_name='artists')
 
@@ -37,7 +43,7 @@ class Album(models.Model):
     name = models.TextField()
     release = models.DateField()
     bibliography = models.TextField()
-    image = models.ImageField(upload_to="media", blank=True, null=True)
+    image = models.ImageField(upload_to="musicsea", blank=True, null=True)
     user = models.ForeignKey(User, default=1)
     group = models.ForeignKey(Group, null=True, related_name='albums')
 
@@ -51,7 +57,7 @@ class Song(models.Model):
     name = models.TextField()
     lyrics = models.TextField()
     about = models.TextField()
-    image = models.ImageField(upload_to="media", blank=True, null=True)
+    image = models.ImageField(upload_to="musicsea", blank=True, null=True)
     user = models.ForeignKey(User, default=1)
     album = models.ForeignKey(Album, null=True, related_name='songs')
     group = models.ForeignKey(Group, null=True, related_name='groupsongs')
