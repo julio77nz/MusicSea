@@ -3,17 +3,39 @@ from django.views.generic import DetailView, ListView
 from django.http import HttpResponse
 from django.views.generic.base import TemplateResponseMixin
 from django.core import serializers
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import DeleteView
 from models import *
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse, reverse_lazy
 from forms import *
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
+class LoginRequiredMixin(object):
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+
+class CheckIsOwnerMixin(object):
+    def get_object(self, *args, **kwargs):
+        obj = super(CheckIsOwnerMixin, self).get_object(*args, **kwargs)
+        if not obj.user == self.request.user:
+            raise PermissionDenied
+        return obj
+
+
+class LoginRequiredCheckIsOwnerUpdateView(LoginRequiredMixin, CheckIsOwnerMixin, UpdateView):
+    template_name = 'musicseaapp/form.html'
+
+
 
 
 def mainpage(request):
     return render(request, 'musicseaapp/mainpage.html')
-
-
 
 
 class GroupsList(ListView):
@@ -99,7 +121,19 @@ class SongCreate(CreateView):
         return super(SongCreate, self).form_valid(form)
 
 
-def delete_group():
-    #delg = Group.objects.get(pk=rest_pk)
-    #delg.delete()
-    return redirect('http://127.0.0.1:8000/musicseaapp/groups/')
+
+class GroupDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
+    model = Group
+    success_url = reverse_lazy('musicseaapp:groups_list')
+
+class ArtistDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
+    model = Artist
+    success_url = reverse_lazy('musicseaapp:artists_list')
+
+class AlbumDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
+    model = Album
+    success_url = reverse_lazy('musicseaapp:albums_list')
+
+class SongDelete(LoginRequiredMixin, CheckIsOwnerMixin, DeleteView):
+    model = Song
+    success_url = reverse_lazy('musicseaapp:songs_list')

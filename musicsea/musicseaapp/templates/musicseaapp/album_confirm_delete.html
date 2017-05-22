@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete {{ object.name }}</title>
+    <form action="" method="post">{% csrf_token %}
+    <h2><p>Are you sure you want to delete "{{ object.name }}"?</p></h2>
+    <input type="submit" value="Confirm" />
+    </form>
+    <br>
+    <button type="button"><a href='/musicseaapp/albums'> Not yet </a></button>
+    </form>
+</head>
+<body>
+
+</body>
+</html>

@@ -90,4 +90,22 @@ urlpatterns = [
     url(r'^songs/create/$',
         SongCreate.as_view(),
         name='songs_create'),
+
+
+
+    url(r'^groups/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
+        GroupDelete.as_view(),
+        name='group_delete'),
+
+    url(r'^artists/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
+        ArtistDelete.as_view(),
+        name='artist_delete'),
+
+    url(r'^albums/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
+        AlbumDelete.as_view(),
+        name='album_delete'),
+
+    url(r'^songs/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
+        SongDelete.as_view(),
+        name='song_delete'),
 ]

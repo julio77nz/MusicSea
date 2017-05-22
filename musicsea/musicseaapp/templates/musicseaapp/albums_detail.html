@@ -6,6 +6,7 @@
     <h1>Album
       {% if object.user == request.user %}
         (<a href="{% url 'musicseaapp:albums_edit' object.id %}">edit</a>)
+        (<a href="{% url 'musicseaapp:album_delete' object.id %}">delete</a>)
       {% endif %}
     </h1>
     <h2> {{ object.name }} </h2>
