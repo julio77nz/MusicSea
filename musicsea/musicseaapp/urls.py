@@ -45,28 +45,28 @@ urlpatterns = [
 
 
     url(r'^groups/(?P<pk>\d+)/edit/$',
-        UpdateView.as_view(
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Group,
             template_name='musicseaapp/form.html',
             form_class=GroupForm),
         name='groups_edit'),
 
     url(r'^artists/(?P<pk>\d+)/edit/$',
-        UpdateView.as_view(
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Artist,
             template_name='musicseaapp/form.html',
             form_class=ArtistForm),
         name='artists_edit'),
 
     url(r'^albums/(?P<pk>\d+)/edit/$',
-        UpdateView.as_view(
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Album,
             template_name='musicseaapp/form.html',
             form_class=AlbumForm),
         name='albums_edit'),
 
     url(r'^songs/(?P<pk>\d+)/edit/$',
-        UpdateView.as_view(
+        LoginRequiredCheckIsOwnerUpdateView.as_view(
             model=Song,
             template_name='musicseaapp/form.html',
             form_class=SongForm),

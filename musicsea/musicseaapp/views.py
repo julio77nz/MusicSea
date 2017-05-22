@@ -14,6 +14,29 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 
+class ConnegResponseMixin(TemplateResponseMixin):
+
+    def render_json_object_response(self, objects, **kwargs):
+        json_data = serializers.serialize(u"json", objects, **kwargs)
+        return HttpResponse(json_data, content_type=u"application/json")
+
+    def render_xml_object_response(self, objects, **kwargs):
+        xml_data = serializers.serialize(u"xml", objects, **kwargs)
+        return HttpResponse(xml_data, content_type=u"application/xml")
+
+    def render_to_response(self, context, **kwargs):
+        if 'extension' in self.kwargs:
+            try:
+                objects = [self.object]
+            except AttributeError:
+                objects = self.object_list
+            if self.kwargs['extension'] == 'json':
+                return self.render_json_object_response(objects=objects)
+            elif self.kwargs['extension'] == 'xml':
+                return self.render_xml_object_response(objects=objects)
+        return super(ConnegResponseMixin, self).render_to_response(context)
+
+
 class LoginRequiredMixin(object):
     @method_decorator(login_required())
     def dispatch(self, *args, **kwargs):
@@ -38,25 +61,25 @@ def mainpage(request):
     return render(request, 'musicseaapp/mainpage.html')
 
 
-class GroupsList(ListView):
+class GroupsList(ListView, ConnegResponseMixin):
     model = Group
     queryset = Group.objects.all()
     context_object_name = 'groups'
     template_name = 'musicseaapp/groups_list.html'
 
-class ArtistsList(ListView):
+class ArtistsList(ListView, ConnegResponseMixin):
     model = Artist
     queryset = Artist.objects.all()
     context_object_name = 'artists'
     template_name = 'musicseaapp/artists_list.html'
 
-class AlbumsList(ListView):
+class AlbumsList(ListView, ConnegResponseMixin):
     model = Album
     queryset = Album.objects.all()
     context_object_name = 'albums'
     template_name = 'musicseaapp/albums_list.html'
 
-class SongsList(ListView):
+class SongsList(ListView, ConnegResponseMixin):
     model = Song
     queryset = Song.objects.all()
     context_object_name = 'songs'
@@ -65,26 +88,26 @@ class SongsList(ListView):
 
 
 
-class GroupsDetail(DetailView):
+class GroupsDetail(DetailView, ConnegResponseMixin):
     model = Group
     template_name = 'musicseaapp/groups_detail.html'
 
-class ArtistsDetail(DetailView):
+class ArtistsDetail(DetailView, ConnegResponseMixin):
     model = Artist
     template_name = 'musicseaapp/artists_detail.html'
 
-class AlbumsDetail(DetailView):
+class AlbumsDetail(DetailView, ConnegResponseMixin):
     model = Album
     template_name = 'musicseaapp/albums_detail.html'
 
-class SongsDetail(DetailView):
+class SongsDetail(DetailView, ConnegResponseMixin):
     model = Song
     template_name = 'musicseaapp/songs_detail.html'
 
 
 
 
-class GroupCreate(CreateView):
+class GroupCreate(LoginRequiredMixin, CreateView):
     model = Group
     template_name = 'musicseaapp/form.html'
     form_class = GroupForm
@@ -93,7 +116,7 @@ class GroupCreate(CreateView):
         form.instance.user = self.request.user
         return super(GroupCreate, self).form_valid(form)
 
-class ArtistCreate(CreateView):
+class ArtistCreate(LoginRequiredMixin, CreateView):
     model = Artist
     template_name = 'musicseaapp/form.html'
     form_class = ArtistForm
@@ -102,7 +125,7 @@ class ArtistCreate(CreateView):
         form.instance.user = self.request.user
         return super(ArtistCreate, self).form_valid(form)
 
-class AlbumCreate(CreateView):
+class AlbumCreate(LoginRequiredMixin, CreateView):
     model = Album
     template_name = 'musicseaapp/form.html'
     form_class = AlbumForm
@@ -111,7 +134,7 @@ class AlbumCreate(CreateView):
         form.instance.user = self.request.user
         return super(AlbumCreate, self).form_valid(form)
 
-class SongCreate(CreateView):
+class SongCreate(LoginRequiredMixin, CreateView):
     model = Song
     template_name = 'musicseaapp/form.html'
     form_class = SongForm
