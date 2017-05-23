@@ -3,8 +3,11 @@ from  django.utils import timezone
 from  django.views.generic import DetailView, ListView, UpdateView
 from  models import *
 from  views import *
+from rest_framework.urlpatterns import format_suffix_patterns
+from django.views.generic import DetailView, ListView, UpdateView
 
 urlpatterns = [
+
 
     url(r'^groups/$',
         GroupsList.as_view(),
@@ -108,4 +111,29 @@ urlpatterns = [
     url(r'^songs/(?P<pk>[a-zA-Z0-9 ]+)/delete/$',
         SongDelete.as_view(),
         name='song_delete'),
+
 ]
+
+urlpatterns  +=  [
+
+    url(r'^api/groups/$',
+            APIGroupList.as_view(),  name='group-list'),
+    url(r'^api/groups/(?P<pk>\d+)/$',
+            APIGroupDetail.as_view(), name='group-detail'),
+    url(r'^api/artists/$',
+            APIArtistList.as_view(),  name='artist-list'),
+    url(r'^api/artists/(?P<pk>\d+)/$',
+            APIArtistDetail.as_view(), name='artist-detail'),
+    url(r'^api/albums/$',
+            APIAlbumList.as_view(),  name='album-list'),
+    url(r'^api/albums/(?P<pk>\d+)/$',
+            APIAlbumDetail.as_view(), name='album-detail'),
+    url(r'^api/songs/$',
+            APISongList.as_view(),  name='song-list'),
+    url(r'^api/songs/(?P<pk>\d+)/$',
+            APISongDetail.as_view(), name='song-detail'),
+]
+
+urlpatterns  =  format_suffix_patterns(urlpatterns,  allowed=['api',  'json',  'xml'])
+
+
