@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
+from datetime import date
 
 class Group(models.Model):
     name = models.TextField()
@@ -9,7 +10,7 @@ class Group(models.Model):
     city = models.TextField(blank=True, null=True)
     province_or_state = models.TextField(blank=True, null=True)
     country = models.TextField(blank=True, null=True)
-    birthdate = models.DateField()
+    birthdate = models.DateField(default=date.today)
     bibliography = models.TextField()
     image = models.ImageField(upload_to="musicsea", blank=True, null=True)
     url = models.URLField(blank=True, null=True)
@@ -27,7 +28,7 @@ class Artist(models.Model):
     city = models.TextField(blank=True, null=True)
     province_or_state = models.TextField(blank=True, null=True)
     country = models.TextField(blank=True, null=True)
-    birthdate = models.DateField()
+    birthdate = models.DateField(default=date.today)
     bibliography = models.TextField()
     image = models.ImageField(upload_to="musicsea", blank=True, null=True)
     user = models.ForeignKey(User, default=1)
@@ -41,7 +42,7 @@ class Artist(models.Model):
 
 class Album(models.Model):
     name = models.TextField()
-    release = models.DateField()
+    release = models.DateField(default=date.today)
     bibliography = models.TextField()
     image = models.ImageField(upload_to="musicsea", blank=True, null=True)
     user = models.ForeignKey(User, default=1)

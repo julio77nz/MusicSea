@@ -6,6 +6,13 @@ Admin Users:
     ID: admin
     PSS: 123
 
+Other Users to test:
+    ID: user1
+    PSS: passtotest
+
+    ID: user2
+    PSS: passtotest
+
 
 Deployment:
 
