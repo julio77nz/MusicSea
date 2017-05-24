@@ -23,8 +23,9 @@ class Group(models.Model):
         return reverse('musicseaapp:groups_detail', kwargs={'pk': self.pk})
 
 class Artist(models.Model):
+    gender_type = (('M', 'Male'), ('F', 'Female'))
     name = models.TextField()
-    gender = models.TextField()
+    gender = models.CharField(max_length=1, choices=gender_type)
     city = models.TextField(blank=True, null=True)
     province_or_state = models.TextField(blank=True, null=True)
     country = models.TextField(blank=True, null=True)

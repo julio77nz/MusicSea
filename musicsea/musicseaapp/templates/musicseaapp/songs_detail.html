@@ -19,19 +19,19 @@
       </li>
 
       <li>
+          <b>Group:</b><a href="{% url "musicseaapp:groups_detail" object.group.id%}">  {{object.group.name}} </a>
+      </li>
+
+      <li>
+          <b>Album:</b><a href="{% url "musicseaapp:albums_detail" object.album.id%}">  {{object.album.name}} </a>
+      </li>
+
+      <li>
           <b>Lyrics:</b> {{object.lyrics}}
       </li>
 
       <li>
           <b>About:</b> {{object.about}}
-      </li>
-
-      <li>
-          <b>Group:</b> {{object.group}}
-      </li>
-
-      <li>
-          <b>Album:</b> {{object.album}}
       </li>
 
       <br>

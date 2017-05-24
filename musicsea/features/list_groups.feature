@@ -1,39 +1,39 @@
-# Created by ierathenz at 23/05/17
 Feature: List Groups
-  As a User, I want to see how many groups there are.
+  In order to keep myself up to date about groups registered in musicseaapp
+  As a user
+  I want to list the last 5 registered groups
 
-  Background: There are 5 registered groups by same user
-  Given Exist a user "user" with password "password"
-  And Exist group registered by "user"
-    | name        | genre      |
-    | Group1      | pop        |
-    | Group2      | pop        |
-    | Group3      | pop        |
-    | Group4      | pop        |
-    | Group5      | pop        |
+  Background: There are 6 registered groups by same user
+    Given Exists a user "user" with password "password"
+    And Exists group registered by "user"
+      | name           | date        |
+      | Group 1        | 2017-06-18  |
+      | Group 2        | 2017-06-19  |
+      | Group 3        | 2017-06-20  |
+      | Group 4        | 2017-06-21  |
+      | Group 5        | 2017-06-22  |
 
   Scenario: List the last five
     When I list groups
     Then I'm viewing a list containing
-    | name        |
-    | Group1      |
-    | Group2      |
-    | Group3      |
-    | Group4      |
-    | Group5      |
+      | name           |
+      | Group 5        |
+      | Group 4        |
+      | Group 3        |
+      | Group 2        |
+      | Group 1        |
     And The list contains 5 groups
 
   Scenario: List the last five
     Given Exists group registered by "user"
-      | name        | genre      |
-      | Group6      | pop        |
+      | name            | date        |
+      | Group 6         | 2017-06-17  |
     When I list groups
     Then I'm viewing a list containing
-      | name        |
-      | Group6      |
-      | Group5      |
-      | Group4      |
-      | Group3      |
-      | Group2      |
-
+      | name            |
+      | Group 6        |
+      | Group 5        |
+      | Group 4        |
+      | Group 3        |
+      | Group 2        |
     And The list contains 5 groups

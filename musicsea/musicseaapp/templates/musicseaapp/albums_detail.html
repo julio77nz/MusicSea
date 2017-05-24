@@ -19,15 +19,15 @@
       </li>
 
       <li>
+          <b>Group:</b><a href="{% url "musicseaapp:groups_detail" object.group.id%}">  {{object.group.name}} </a>
+      </li>
+
+      <li>
           <b>Release:</b> {{object.release}}
       </li>
 
       <li>
           <b>Bibliography:</b> {{object.bibliography}}
-      </li>
-
-      <li>
-          <b>Group:</b> {{object.group}}
       </li>
 
       <br>

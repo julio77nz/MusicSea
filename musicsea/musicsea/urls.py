@@ -24,8 +24,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', mainpage),
     url(r'^musicseaapp/',  include('musicseaapp.urls',  namespace='musicseaapp')),
-    url(r'^accounts/login/$',  login,  name='login'),
-    url(r'^accounts/logout/$',  logout,  name='logout'),
+    url(r'^accounts/login/$', login, name='login'),
+    url(r'^accounts/logout/$', logout, name='logout'),
     url(r'^api/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('^register/', CreateView.as_view(
         template_name='register.html',
