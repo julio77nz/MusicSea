@@ -3,35 +3,40 @@
     <title>Group</title>
   </head>
   <body>
-    <h1>Group
+  <span vocab="http://schema.org/" typeof="MusicGroup">
+    <h1>MusicGroup
       {% if object.user == request.user %}
         (<a href="{% url 'musicseaapp:groups_edit' object.id %}">edit</a>)
         (<a href="{% url 'musicseaapp:group_delete' object.id %}">delete</a>)
       {% endif %}
     </h1>
-    <h2> {{ object.name }} </h2>
+
+      <span property="name"><h2>{{ object.name }}</h2> </span>
     {%	if	object.image	%}
-        <p><img	src="{{object.image.url}}" width="300px"/></p>
+        <span rel="image">
+        <span vocab="http://schema.org/" typeof="ImageObject">
+        <p><img	src="{{object.image.url}}" width="300px"/></p></span></span>
     {%	endif	%}
     <ul>
       <li>
-              <b>Name:</b> {{object.name}}
+          <b>Name:</b> <span property="name">{{object.name}}</span>
       </li>
       <li>
-              <b>Genre:</b> {{object.genre}}
+          <b>Genre:</b> <span property="genre">{{object.genre}}</span>
+
       </li>
       <li>
-              <b>Was created at:</b> {{object.city}} (city), {{object.province_or_state}} (province/state), {{object.country}} (country)
+          <b>Was created at:</b> <span property="address">{{object.city}} (city), {{object.province_or_state}} (province/state), {{object.country}} (country)</span>
       </li>
       <li>
-              <b>Birthdate:</b> {{object.birthdate}}
+          <b>Birthdate:</b> <span property="foundingDate">{{object.birthdate}}</span>
       </li>
       <li>
-              <b>Bibliography:</b> {{object.bibliography}}
+          <b>Bibliography:</b> <span property="description">{{object.bibliography}}</span>
       </li>
 
       <li>
-          <b>Web:</b><a href="{{object.url}}" target="_blank"> {{object.url}} </a>
+          <b>Web:</b><span property="url"><a href="{{object.url}}" target="_blank"> {{object.url}} </a></span>
       </li>
 
       <br>
