@@ -3,35 +3,40 @@
     <title>Song</title>
   </head>
   <body>
+  <span vocab="http://schema.org/" typeof="MusicRelease">
     <h1>Song
       {% if object.user == request.user %}
         (<a href="{% url 'musicseaapp:songs_edit' object.id %}">edit</a>)
         (<a href="{% url 'musicseaapp:song_delete' object.id %}">delete</a>)
       {% endif %}
     </h1>
+
+    <span property="name"><h2> {{ object.name }} </h2></span>
     <h2> {{ object.name }} </h2>
     {%	if	object.image	%}
-        <p><img	src="{{object.image.url}}" width="300px"/></p>
+        <span rel="image">
+        <span vocab="http://schema.org/" typeof="ImageObject">
+        <p><img	src="{{object.image.url}}" width="300px"/></p></span></span>
     {%	endif	%}
     <ul>
       <li>
-          <b>Name:</b> {{object.name}}
+          <b>Name:</b> <span property="name">{{object.name}}</span>
       </li>
 
       <li>
-          <b>Group:</b><a href="{% url "musicseaapp:groups_detail" object.group.id%}">  {{object.group.name}} </a>
+          <b>Group:</b><a href="{% url "musicseaapp:groups_detail" object.group.id%}">  <span vocab="http://schema.org/" typeof="Organization"> <span property="brand">{{object.group.name}}</span></span> </a>
       </li>
 
       <li>
-          <b>Album:</b><a href="{% url "musicseaapp:albums_detail" object.album.id%}">  {{object.album.name}} </a>
+          <b>Album:</b><a href="{% url "musicseaapp:albums_detail" object.album.id%}">  < property="releaseOf">{{object.album.name}}</span> </a>
       </li>
 
       <li>
-          <b>Lyrics:</b> {{object.lyrics}}
+          <b>Lyrics:</b> <span property="description">{{object.lyrics}}</span>
       </li>
 
       <li>
-          <b>About:</b> {{object.about}}
+          <b>About:</b> <span property="about">{{object.about}}</span>
       </li>
 
       <br>
