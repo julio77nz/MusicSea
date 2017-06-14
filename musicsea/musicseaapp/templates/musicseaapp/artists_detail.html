@@ -3,39 +3,43 @@
     <title>Artist</title>
   </head>
   <body>
+  <span vocab="http://schema.org/" typeof="Person">
     <h1>Artist
       {% if object.user == request.user %}
         (<a href="{% url 'musicseaapp:artists_edit' object.id %}">edit</a>)
         (<a href="{% url 'musicseaapp:artist_delete' object.id %}">delete</a>)
       {% endif %}
     </h1>
-    <h2> {{ object.name }} </h2>
+
+    <span property="name"><h2>{{ object.name }}</h2> </span>
     {%	if	object.image	%}
-        <p><img	src="{{object.image.url}}" width="300px"/></p>
+        <span rel="image">
+        <span vocab="http://schema.org/" typeof="ImageObject">
+        <p><img	src="{{object.image.url}}" width="300px"/></p></span></span>
     {%	endif	%}
     <ul>
       <li>
-          <b>Name:</b> {{object.name}}
+          <b>Name:</b><span property="familyName"> {{object.name}}</span>
       </li>
 
       <li>
-          <b>Group:</b><a href="{% url "musicseaapp:groups_detail" object.group.id%}">  {{object.group.name}} </a>
+          <b>Group:</b><a href="{% url "musicseaapp:groups_detail" object.group.id%}">  <span vocab="http://schema.org/" typeof="Organization"> <span property="brand">{{object.group.name}}</span> </span></a>
       </li>
 
       <li>
-          <b>Gender:</b> {{object.gender}}
+          <b>Gender:</b> <span property="gender">{{object.gender}}</span>
       </li>
 
       <li>
-          <b>Was born at:</b> {{object.city}} (city), {{object.province_or_state}} (province/state), {{object.country}} (country)
+          <b>Was born at:</b> <span property="birthPlace">{{object.city}} (city), {{object.province_or_state}} (province/state), {{object.country}} (country)</span>
       </li>
 
       <li>
-          <b>Birthdate:</b> {{object.birthdate}}
+          <b>Birthdate:</b> <span property="birthDate">{{object.birthdate}}</span>
       </li>
 
       <li>
-          <b>Bibliography:</b> {{object.bibliography}}
+          <b>Bibliography:</b> <span property="description">{{object.bibliography}}</span>
       </li>
 
 
